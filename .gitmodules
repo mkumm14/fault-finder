@@ -1,0 +1,6 @@
+[submodule "server"]
+	path = server
+	url = https://github.com/mkumm14/ff_backend.git
+[submodule "client"]
+	path = client
+	url = https://github.com/mkumm14/fault-finder-client.git
