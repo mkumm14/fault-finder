@@ -1,0 +1,39 @@
+# Base image for the client
+FROM node:14-alpine as client
+
+# Set the working directory
+WORKDIR /app/client
+
+# Copy package.json and package-lock.json
+COPY client/package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the client code
+COPY client/ .
+
+EXPOSE 5173
+# Build the client code
+CMD ["npm", "run", "dev"]
+
+# Base image for the server
+FROM python:3.9-slim as server
+
+# Set the working directory
+WORKDIR /app/server
+
+# Copy requirements.txt
+COPY server/requirements.txt ./
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the server code
+COPY server/ .
+
+# Expose the server port
+EXPOSE 8000
+
+# Start the server
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
