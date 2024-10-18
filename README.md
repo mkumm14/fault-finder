@@ -32,6 +32,7 @@ Include screenshots or a link to a live demo here.
 
    ```
 2. Run the project wth Docker Compose:
-    ```bash docker-compose up --build
+    ```bash
+    docker-compose up --build
     ```
 
