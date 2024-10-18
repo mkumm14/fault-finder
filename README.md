@@ -25,6 +25,26 @@ A bug tracking system built with Django on the backend and React JS on the front
 ### register
 ![alt text](image-2.png)
 
+### dashboard page
+![alt text](image-3.png)
+
+### projects page
+![alt text](image-4.png)
+
+### create project 
+![alt text](image-5.png)
+
+### project specific dashboard
+![alt text](image-6.png)
+
+### project settings
+![alt text](image-7.png)
+
+### project edit 
+![alt text](image-8.png)
+
+### dark mode
+![alt text](image-9.png)
 
 ### Prerequisites
 - Docker
