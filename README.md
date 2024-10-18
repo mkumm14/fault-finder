@@ -15,9 +15,6 @@ A bug tracking system built with Django on the backend and React JS on the front
 - **Database**: PostgreSQL
 - **Other**: JWT Authentication, Docker
 
-## Screenshots/Demo
-![alt text](image.png)
-
 ### Prerequisites
 - Docker
 - Docker Compose
