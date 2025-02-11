@@ -21,7 +21,7 @@ jobs:
 
     - name: Build and Tag Docker Images
       run: |
-        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/client:latest --target=build-client -f Dockerfile .
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/client:latest --target=client -f Dockerfile .
         docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/server:latest --target=server -f Dockerfile .
 
     - name: Push Images to Docker Hub
