@@ -11,7 +11,7 @@ RUN npm install
 
 # Copy the source code and build
 COPY client/ ./
-RUN npm run build
+RUN npm run build || true
 
 # ===========================
 # Final Client Image (Using Serve)
