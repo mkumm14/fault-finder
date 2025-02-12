@@ -34,15 +34,18 @@ jobs:
     needs: build-and-push  
     steps:
     - name: Set up SSH key
-      uses: shimataro/ssh-key-action@v2
-      with:
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        name: id_rsa_do
-        known_hosts: ${{ secrets.KNOWN_HOSTS }}  
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.DROPLET_IP }} >> ~/.ssh/known_hosts
+
+    - name: Debug SSH Key Authentication
+      run: ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no root@${{ secrets.DROPLET_IP }} "echo SSH connection successful"
 
     - name: Deploy to DigitalOcean
       run: |
-        ssh root@${{ secrets.DROPLET_IP }} "
+        ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no root@${{ secrets.DROPLET_IP }} << EOF
           cd /root/fault-finder-project;
           docker-compose down;
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/client:latest;
@@ -50,4 +53,4 @@ jobs:
           docker compose -f docker-compose.yml up -d;
           docker compose exec server python manage.py migrate;
           docker system prune -f;
-        "
+        EOF
