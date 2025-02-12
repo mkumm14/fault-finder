@@ -11,8 +11,8 @@ RUN npm install
 
 # Copy the source code and build
 COPY client/ ./
-RUN npm run build || true
-RUN echo ${PWD} && ls 
+RUN npm run build 
+RUN ls -la /app/client/dist  # Debugging step to verify build output
 
 # =========================
 # Final Client Image (Using Serve)
