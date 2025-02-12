@@ -21,7 +21,7 @@ FROM node:18-alpine AS client
 WORKDIR /app/client
 
 # Copy built files from previous stage
-COPY --from=build-client /app/client/dist /app/client/build
+COPY --from=build-client /app/client/build /app/client/build
 
 # Install serve
 RUN npm install -g serve
