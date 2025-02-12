@@ -21,7 +21,7 @@ FROM node:18-alpine AS client
 WORKDIR /app/client
 
 # Copy built files from previous stage
-COPY --from=build-client /app/client/build /app/client/build
+COPY --from=build-client /app/client/dist ./
 
 # Install serve
 RUN npm install -g serve
@@ -30,7 +30,7 @@ RUN npm install -g serve
 EXPOSE 3000
 
 # Run serve in production mode
-CMD ["serve", "-s", "build", "-l", "3000"]
+CMD ["serve", "-s", ".", "-l", "3000"]
 
 # ===========================
 # Build Backend (Django)
