@@ -12,7 +12,7 @@ RUN npm install
 # Copy the source code and build
 COPY client/ ./
 RUN npm run build || true
-RUN echo ${PWD} && ls -lR
+RUN echo ${PWD} && ls 
 
 # =========================
 # Final Client Image (Using Serve)
