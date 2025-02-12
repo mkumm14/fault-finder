@@ -15,8 +15,6 @@ services:
 
   client:
     image: mkjun14/client:latest
-    ports:
-      - "3000:80"
     depends_on:
       - server
 

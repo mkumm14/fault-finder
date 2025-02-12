@@ -49,11 +49,10 @@ jobs:
           docker-compose down
 
                     
-          # Pull latest Docker images
+          
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/client:latest
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/server:latest
           
-          # Restart containers with the new images  
           docker compose -f docker-compose.yml up -d
 
           docker compose exec server python manage.py migrate
