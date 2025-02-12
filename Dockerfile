@@ -12,8 +12,9 @@ RUN npm install
 # Copy the source code and build
 COPY client/ ./
 RUN npm run build || true
+RUN echo ${PWD} && ls -lR
 
-# ===========================
+# =========================
 # Final Client Image (Using Serve)
 # ===========================
 FROM node:18-alpine AS client
