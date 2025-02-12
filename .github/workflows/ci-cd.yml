@@ -41,11 +41,11 @@ jobs:
         ssh-keyscan -H ${{ secrets.DROPLET_IP }} >> ~/.ssh/known_hosts
 
     - name: Debug SSH Key Authentication
-      run: ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no root@${{ secrets.DROPLET_IP }} "echo SSH connection successful"
+      run: ssh -i ~/.ssh/id_rsa_do -o StrictHostKeyChecking=no root@${{ secrets.DROPLET_IP }} "echo SSH connection successful"
 
     - name: Deploy to DigitalOcean
       run: |
-        ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no root@${{ secrets.DROPLET_IP }} << EOF
+        ssh -i ~/.ssh/id_rsa_do -o StrictHostKeyChecking=no root@${{ secrets.DROPLET_IP }} << EOF
           cd /root/fault-finder-project;
           docker-compose down;
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/client:latest;
