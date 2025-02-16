@@ -44,6 +44,12 @@ WORKDIR /app/server
 COPY server/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
+
+# Install gunicorn explicitly
+RUN pip install --no-cache-dir gunicorn
+
+
+
 # Copy Django source code
 COPY server/ ./
 
