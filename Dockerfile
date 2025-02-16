@@ -61,4 +61,4 @@ COPY --from=build-server /app/server /app/server
 EXPOSE 8000
 
 # Use Gunicorn for production
-CMD ["gunicorn", "--workers", "4", "--bind", "0.0.0.0:8000", "server.wsgi:application"]
+CMD ["gunicorn", "--workers", "4", "--bind", "0.0.0.0:8000", "faultfinder.wsgi:application"]
