@@ -48,9 +48,10 @@ jobs:
         ssh -i ~/.ssh/id_rsa_do -o StrictHostKeyChecking=no root@${{ secrets.DROPLET_IP }} << EOF
           cd /root/fault-finder-project;
           docker compose down;
+          docker image prune -af;
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/client:latest;
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/server:latest;
-          docker compose -f docker-compose.yml up -d;
+          docker compose up -d --force-recreate --build;
           docker compose exec server python manage.py migrate;
           docker system prune -f;
         EOF
