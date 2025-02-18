@@ -33,6 +33,8 @@ EXPOSE 3000
 # Run serve in production mode
 CMD ["serve", "-s", ".", "-l", "3000"]
 
+
+
 # ===========================
 # Build Backend (Django)
 # ===========================
@@ -40,14 +42,13 @@ FROM python:3.9-slim AS build-server
 
 WORKDIR /app/server
 
+# Install system dependencies
+RUN apt-get update && apt-get install -y gcc python3-dev musl-dev
+
 # Install dependencies
 COPY server/requirements.txt ./
+RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
-
-
-
-
-
 
 # Copy Django source code
 COPY server/ ./
@@ -62,9 +63,9 @@ WORKDIR /app/server
 # Copy only necessary files from the build stage
 COPY --from=build-server /app/server /app/server
 
-# Install gunicorn explicitly
-RUN pip install --no-cache-dir gunicorn
-RUN pip install setuptools
+# Ensure Django is installed
+RUN pip install --no-cache-dir --upgrade pip
+RUN pip install --no-cache-dir -r /app/server/requirements.txt
 
 # Expose the Django port
 EXPOSE 8000
