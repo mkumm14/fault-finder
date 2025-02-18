@@ -45,8 +45,7 @@ COPY server/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 
-# Install gunicorn explicitly
-RUN pip install --no-cache-dir gunicorn
+
 
 
 
@@ -62,6 +61,10 @@ WORKDIR /app/server
 
 # Copy only necessary files from the build stage
 COPY --from=build-server /app/server /app/server
+
+# Install gunicorn explicitly
+RUN pip install --no-cache-dir gunicorn
+RUN pip install setuptools
 
 # Expose the Django port
 EXPOSE 8000
