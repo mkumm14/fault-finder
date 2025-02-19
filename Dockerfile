@@ -71,4 +71,4 @@ RUN pip install --no-cache-dir -r /app/server/requirements.txt
 EXPOSE 8000
 
 # Use Gunicorn for production
-CMD ["gunicorn", "--workers", "4", "--bind", "0.0.0.0:8000", "faultfinder.wsgi:application"]
+CMD ["gunicorn", "--workers", "4", "--bind", "0.0.0.0:8000", "--log-file","1.logfile.log","faultfinder.wsgi:application"]
