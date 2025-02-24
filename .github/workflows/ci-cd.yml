@@ -52,6 +52,8 @@ jobs:
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/client:latest;
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/server:latest;
           docker compose up -d --force-recreate --build;
+          docker compose exec server python manage.py makemigrations;
           docker compose exec server python manage.py migrate;
+          docker compose exec server python manage.py collectstatic --noinput;
           docker system prune -f;
         EOF

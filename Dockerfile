@@ -67,8 +67,6 @@ COPY --from=build-server /app/server /app/server
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir -r /app/server/requirements.txt
 
-# Collect static files
-RUN python manage.py collectstatic --noinput
 
 
 # Expose the Django port
